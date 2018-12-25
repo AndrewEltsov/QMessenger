@@ -1,21 +1,6 @@
 import React from 'react';
 import {Footer, FooterTab, Button, Text} from 'native-base';
-import Input from './Input.js'
-
-
-/* const AppFooter = () => (
-	<Footer>
-		<FooterTab>
-			<Button	active = {this.state.FirstButton}>
-				<Text>Статьи</Text>
-			</Button>
-			<Button active = {this.state.SecondButton} onPress = {this.ChangeButton}> 
-				<Text>Подкасты</Text>
-			</Button>
-		</FooterTab>
-	</Footer>
-);
-export default AppFooter; */
+import Input from './InputField.js'
 
 export default class AppFooter extends React.Component {
 
@@ -25,35 +10,47 @@ export default class AppFooter extends React.Component {
 			SecondButton: false};
 	}
 	
-	SetFBActive = () => {
+	componentDidMount() {
+		if (this.props.view == "dialogues") {
 			this.setState({
 				FirstButton: true,
-	   			SecondButton: false
-			})
-			console.log(this.state);
+				SecondButton: false
+			});	
+		} else {
+			this.setState({
+				FirstButton: false,
+				SecondButton: true
+			});
+		}
+	}
+
+	SetFBActive = () => {
+			this.setState({
+			FirstButton: true,
+			SecondButton: false
+		});
+		this.props.chooseView("dialogues")
 	}
 
 	SetSBActive= () =>  {
-		console.log(1);
-			this.setState({
-				FirstButton: false,
-	   			SecondButton: true
-			})
-			console.log(3);
+		this.setState({
+			FirstButton: false,
+			SecondButton: true
+		});
+		this.props.chooseView("users");
 	}
 
     render() {
        return (
 		<Footer >
-			{/* <FooterTab >
+			<FooterTab >
 				<Button	active = {this.state.FirstButton} onPress = {this.state.SecondButton ? this.SetFBActive : () => {}}>
-					<Text>Статьи</Text>
+					<Text>Dialogues</Text>
 				</Button>
 				<Button active = {this.state.SecondButton} onPress = {this.state.FirstButton ? this.SetSBActive : () => {}}> 
-					<Text>Подкасты</Text>
+					<Text>Users</Text>
 				</Button>
-			</FooterTab> */}
-			<Input/>
+			</FooterTab>
 		</Footer>
        );
     }

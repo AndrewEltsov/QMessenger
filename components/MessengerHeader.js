@@ -9,7 +9,7 @@ export default class MessengerHeader extends Component {
         }}>   
           <Left>
           {this.props.isDialogueOpened ? 
-            <Button transparent onPressOut={this.props.backFunction}>
+            <Button transparent onPress={this.props.backFunction}>
               <Icon name='arrow-back' />
             </Button> : null}
           </Left>
@@ -17,7 +17,7 @@ export default class MessengerHeader extends Component {
             <Title>{this.props.HeaderName}</Title>
           </Body>
           <Right>
-            <Button transparent>
+            <Button transparent onPress={this.props.menuFunction}>
               <Icon name='menu' />
             </Button>
           </Right>
